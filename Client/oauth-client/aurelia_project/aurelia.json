@@ -18,7 +18,7 @@
       "server": "dev",
       "extractCss": "prod",
       "coverage": false
-    }
+    }      
   },
   "platform": {
     "hmr": false,

@@ -1,6 +1,8 @@
 import {Aurelia} from 'aurelia-framework'
+import { OpenIdConnectConfiguration } from "aurelia-open-id-connect";
 import * as environment from '../config/environment.json';
 import {PLATFORM} from 'aurelia-pal';
+import oidcConfig from "./open-id-connect-configuration-identity-server";
 
 export function configure(aurelia: Aurelia) {
   aurelia.use
@@ -8,6 +10,7 @@ export function configure(aurelia: Aurelia) {
     .feature(PLATFORM.moduleName('resources/index'));
 
   aurelia.use.developmentLogging(environment.debug ? 'debug' : 'warn');
+  aurelia.use.plugin(PLATFORM.moduleName("aurelia-open-id-connect"), () => oidcConfig);
 
   if (environment.testing) {
     aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));
