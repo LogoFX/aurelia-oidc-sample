@@ -35,6 +35,9 @@ export class App {
         route: ["register"],
         title: "register",
         nav: true,
+        settings: {
+          roles: [!OpenIdConnectRoles.Authenticated],
+        }
       },
       {
         moduleId: PLATFORM.moduleName("./private"),

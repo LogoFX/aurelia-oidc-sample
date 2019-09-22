@@ -31,6 +31,13 @@ namespace AuthServer.Controllers
             _schemeProvider = schemeProvider;
             _clientStore = clientStore;
             _events = events;
+
+            //Register(new RegisterRequestViewModel
+            //{
+            //    Email = "user@mail.com",
+            //    Name = "user",
+            //    Password = "User123-098"
+            //}).Wait();
         }
 
         /// <summary>

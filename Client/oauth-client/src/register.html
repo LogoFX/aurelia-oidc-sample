@@ -1,3 +1,43 @@
 <template>
-  <p>Register</p>
+  <require from="./register.css"></require>
+
+  <div class="row justify-content-center">
+    <div class="col-md-4 text-center">
+      <form if.bind="!success">
+        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+        <div class="form-group">
+            <label for="name" class="sr-only">Name</label>
+            <input type="text" id="name" name="name" value.two-way="userRegistration.name" class="form-control" placeholder="Your name" required autoFocus>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="sr-only">Email address</label>
+            <input type="email" id="email" ref="email" value.bind="userRegistration.email & validate" class="form-control" placeholder="Email address" email required>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" value.bind="userRegistration.password" class="form-control" placeholder="Password" aria-describedby="passwordHelp" required>     
+            <small id="passwordHelp" class="form-text text-muted">Min. 6 characters with at least one non alphanumeric character</small>
+        </div>   
+
+        <ul if.bind="controller.errors">
+            <li repeat.for="error of controller.errors">
+                ${error.message}
+            </li>
+        </ul>
+        
+        <button class="btn btn-lg btn-primary btn-block" click.delegate="onSubmit()">Go</button>
+
+        <div if.bind="error" class="alert alert-danger mt-3" role="alert">
+            <strong>Oops!</strong> ${error}
+        </div>     
+      </form>      
+
+      <div if.bind="success" class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Well done!</h4>
+          <p>Your account was created successfully, <a routerLink="/login">Please login</a> to continue.</p>        
+      </div>  
+    </div> 
+  </div>
 </template>
