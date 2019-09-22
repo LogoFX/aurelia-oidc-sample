@@ -14,6 +14,10 @@ export class App {
     this.openIdConnect.observeUser((user: User) => this.user = user);
   }
 
+  public get isLoggedIn(): boolean {
+    return this.user !== null && this.user !== undefined;
+  }
+
   public configureRouter(routerConfiguration: RouterConfiguration, router: Router) {
 
     // switch from hash (#) to slash (/) navigation
@@ -53,5 +57,25 @@ export class App {
 
     this.openIdConnect.configure(routerConfiguration);
     this.router = router;
+  }
+
+  public onLogin(){
+    this.openIdConnect.login();
+  }
+
+  public onLogout(){
+    this.openIdConnect.logout();
+  }
+
+  public async attached() {
+    this.openIdConnect.addOrRemoveHandler('addUserUnloaded', () => {
+      this.user = null;
+    });
+
+    this.openIdConnect.addOrRemoveHandler('addUserLoaded', async () => {
+      this.user = await this.openIdConnect.getUser();
+    });
+
+    this.user = await this.openIdConnect.getUser();
   }
 }
