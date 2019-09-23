@@ -1,7 +1,7 @@
 import { OpenIdConnectConfiguration } from "aurelia-open-id-connect";
 import { UserManagerSettings, WebStorageStateStore } from "oidc-client";
 
-const appHost = "http://localhost:9000";
+const appHost = "http://localhost:4200";
 
 export default {
   loginRedirectRoute: "/private",

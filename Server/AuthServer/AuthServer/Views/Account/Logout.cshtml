@@ -1,0 +1,23 @@
+﻿@model LogoutViewModel
+
+<div class="row">
+
+    <div class="col-md-4">
+
+        <h1 class="mt-5 mb-3">Logout</h1>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <p>Would you like to logout of IdentityServer?</p>
+                <form asp-route="Logout">
+                    <input type="hidden" asp-for="SignOutId" />
+                    <fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-primary">Yes</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

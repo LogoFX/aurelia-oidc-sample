@@ -5,6 +5,8 @@ namespace AuthServer
 {
     public class Config
     {
+        private const string AppHost = "http://localhost:4200";
+
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
             return new List<IdentityResource>
@@ -30,15 +32,24 @@ namespace AuthServer
         {
             return new[]
             {
-                new Client {
+                new Client
+                {
                     RequireConsent = false,
                     ClientId = "angular_spa",
                     ClientName = "Angular SPA",
                     AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowedScopes = { "openid", "profile", "email", "api.read" },
-                    RedirectUris = {"http://localhost:9000/signin-oidc"},
-                    PostLogoutRedirectUris = {"http://localhost:9000/signout-oidc"},
-                    AllowedCorsOrigins = {"http://localhost:9000"},
+                    AllowedScopes = {"openid", "profile", "email", "api.read"},
+                    RedirectUris =
+                    {
+                        $"{AppHost}/auth-callback",
+                        $"{AppHost}/signin-oidc"
+                    },
+                    PostLogoutRedirectUris =
+                    {
+                        $"{AppHost}/",
+                        $"{AppHost}/signout-oidc"
+                    },
+                    AllowedCorsOrigins = {AppHost},
                     AllowAccessTokensViaBrowser = true,
                     AccessTokenLifetime = 3600
                 }

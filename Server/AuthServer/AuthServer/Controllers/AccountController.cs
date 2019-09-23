@@ -40,6 +40,19 @@ namespace AuthServer.Controllers
             //}).Wait();
         }
 
+        [HttpGet]
+        public IActionResult Logout(string logoutId)
+        {
+            return View(new LogoutViewModel { SignOutId = logoutId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Logout(LoginInputModel model, string button)
+        {
+            return Ok();
+        }
+
         /// <summary>
         /// Entry point into the login workflow
         /// </summary>
