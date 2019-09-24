@@ -59,6 +59,8 @@ namespace AuthServer.Controllers
         [HttpGet]
         public async Task<IActionResult> Login(string returnUrl)
         {
+			Console.WriteLine("Login " + returnUrl);
+			
             // build a model so we know what to show on the login page
             var vm = await BuildLoginViewModelAsync(returnUrl);
 

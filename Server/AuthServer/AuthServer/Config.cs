@@ -5,7 +5,7 @@ namespace AuthServer
 {
     public class Config
     {
-        private const string AppHost = "http://localhost:4200";
+        private const string AppHost = "https://mkt-dashboard.github.io";
 
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
@@ -42,12 +42,15 @@ namespace AuthServer
                     RedirectUris =
                     {
                         $"{AppHost}/auth-callback",
-                        $"{AppHost}/signin-oidc"
+                        $"{AppHost}/signin-oidc",
+                        $"{AppHost}/index",
+                        $"{AppHost}/private"
                     },
                     PostLogoutRedirectUris =
                     {
                         $"{AppHost}/",
-                        $"{AppHost}/signout-oidc"
+                        $"{AppHost}/signout-oidc",
+                        $"{AppHost}/index"
                     },
                     AllowedCorsOrigins = {AppHost},
                     AllowAccessTokensViaBrowser = true,
