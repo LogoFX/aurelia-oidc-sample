@@ -31,7 +31,7 @@ namespace AuthServer
         private IIdentityServerBuilder UseCertificate(IServiceCollection services)
         {
             X509Certificate2 cert = null;
-            using (var certStore = new X509Store(StoreName.My, StoreLocation.CurrentUser))
+            using (var certStore = new X509Store(StoreName.My, StoreLocation.LocalMachine))
             {
                 certStore.Open(OpenFlags.ReadOnly);
                 var certCollection = certStore.Certificates.Find(
