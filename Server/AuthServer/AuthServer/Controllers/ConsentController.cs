@@ -55,6 +55,7 @@ namespace AuthServer.Controllers
                 return View("Index", vm);
             }
 
+            // ReSharper disable once Mvc.ViewNotResolved
             return View("Error");
         }
 
@@ -73,6 +74,7 @@ namespace AuthServer.Controllers
                 {
                     // if the client is PKCE then we assume it's native, so this change in how to
                     // return the response is for better UX for the end user.
+                    // ReSharper disable once Mvc.ViewNotResolved
                     return View("Redirect", new RedirectViewModel { RedirectUrl = result.RedirectUri });
                 }
 
@@ -89,6 +91,7 @@ namespace AuthServer.Controllers
                 return View("Index", result.ViewModel);
             }
 
+            // ReSharper disable once Mvc.ViewNotResolved
             return View("Error");
         }
 

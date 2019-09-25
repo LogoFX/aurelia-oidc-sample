@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using IdentityServer4.Models;
 
 namespace AuthServer
 {
     public class Config
     {
-        private const string AppHost = "https://mkt-dashboard.github.io";
+        private static readonly string[] AppHosts =
+        {
+            "http://localhost:4200",
+            "https://mkt-dashboard.github.io",
+            "https://aulogin.github.io",
+        };
 
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
@@ -39,20 +45,9 @@ namespace AuthServer
                     ClientName = "Angular SPA",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowedScopes = {"openid", "profile", "email", "api.read"},
-                    RedirectUris =
-                    {
-                        $"{AppHost}/auth-callback",
-                        $"{AppHost}/signin-oidc",
-                        $"{AppHost}/index",
-                        $"{AppHost}/private"
-                    },
-                    PostLogoutRedirectUris =
-                    {
-                        $"{AppHost}/",
-                        $"{AppHost}/signout-oidc",
-                        $"{AppHost}/index"
-                    },
-                    AllowedCorsOrigins = {AppHost},
+                    RedirectUris = AppHosts.Select(x => $"{x}/signin-oidc").ToArray(),
+                    PostLogoutRedirectUris = AppHosts.Select(x => $"{x}/signout-oidc").ToArray(),
+                    AllowedCorsOrigins = AppHosts,
                     AllowAccessTokensViaBrowser = true,
                     AccessTokenLifetime = 3600
                 }

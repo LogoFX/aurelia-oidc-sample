@@ -45,6 +45,8 @@
             <h1 class="mt-5 mb-3">External Login</h1>
 
             <div class="list-group">
+                @* ReSharper disable Mvc.ControllerNotResolved *@
+                @* ReSharper disable Mvc.ActionNotResolved *@
                 @foreach (var provider in Model.VisibleExternalProviders)
                 {
                     <a class="list-group-item list-group-item-action"

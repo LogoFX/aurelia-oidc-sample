@@ -1,5 +1,5 @@
 import {Aurelia} from 'aurelia-framework'
-import * as environment from '../config/environment.json';
+import environment from './environment';
 import {PLATFORM} from 'aurelia-pal';
 import oidcConfig from "./open-id-connect-configuration-identity-server";
 

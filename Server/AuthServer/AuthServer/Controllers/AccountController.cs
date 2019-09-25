@@ -67,6 +67,8 @@ namespace AuthServer.Controllers
             if (vm.IsExternalLoginOnly)
             {
                 // we only have one option for logging in and it's an external provider
+                // ReSharper disable once Mvc.ActionNotResolved
+                // ReSharper disable once Mvc.ControllerNotResolved
                 return RedirectToAction("Challenge", "External", new { provider = vm.ExternalLoginScheme, returnUrl });
             }
 
@@ -98,6 +100,7 @@ namespace AuthServer.Controllers
                     {
                         // if the client is PKCE then we assume it's native, so this change in how to
                         // return the response is for better UX for the end user.
+                        // ReSharper disable once Mvc.ViewNotResolved
                         return View("Redirect", new RedirectViewModel { RedirectUrl = model.ReturnUrl });
                     }
 
@@ -139,6 +142,7 @@ namespace AuthServer.Controllers
                         {
                             // if the client is PKCE then we assume it's native, so this change in how to
                             // return the response is for better UX for the end user.
+                            // ReSharper disable once Mvc.ViewNotResolved
                             return View("Redirect", new RedirectViewModel { RedirectUrl = model.ReturnUrl });
                         }
 

@@ -1,7 +1,8 @@
 import { UserRegistration } from "userRegistration";
 import { inject } from 'aurelia-framework';
-import { ValidationControllerFactory, ValidationRules, ValidationController } from 'aurelia-validation';
+import { ValidationControllerFactory, ValidationController } from 'aurelia-validation';
 import {HttpClient, json} from 'aurelia-fetch-client';
+import environment from './environment';
 
 @inject(ValidationControllerFactory)
 export class Register { 
@@ -19,11 +20,13 @@ export class Register {
   onSubmit() {
 
     let httpClient = new HttpClient();
+
+    alert(environment.authServer);
   
     httpClient.configure(config => {
       config
         .useStandardConfiguration()
-        .withBaseUrl('http://localhost:5000/api/')
+        .withBaseUrl(`${environment.authServer}/api/`)
         .withDefaults({
           headers: {
             'X-Requested-With': 'Fetch'

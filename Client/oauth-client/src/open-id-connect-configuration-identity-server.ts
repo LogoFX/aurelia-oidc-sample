@@ -1,7 +1,8 @@
 import { OpenIdConnectConfiguration } from "aurelia-open-id-connect";
 import { UserManagerSettings, WebStorageStateStore } from "oidc-client";
+import environment from './environment';
 
-const appHost = "http://localhost:4200";
+const appHost = environment.callback;
 
 export default {
   loginRedirectRoute: "/private",
@@ -15,7 +16,7 @@ export default {
 
     // Either host your own OpenID Provider or select a certified authority
     // from the list http://openid.net/certification/
-    authority: "http://localhost:5000",
+    authority: environment.authServer,
     //authority: "https://demo.identityserver.io",
 
     automaticSilentRenew: true,
