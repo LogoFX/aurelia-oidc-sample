@@ -104,6 +104,7 @@ module.exports = ({ production } = {}, {extractCss, analyze, tests, hmr, port, h
   },
   performance: { hints: false },
   devServer: {
+    https: true,
     contentBase: outDir,
     // serve index.html for all 404 (required for push-state)
     historyApiFallback: true,

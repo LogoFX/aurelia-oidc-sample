@@ -8,7 +8,7 @@ namespace AuthServer
     {
         private static readonly string[] AppHosts =
         {
-            "http://localhost:4200",
+            "https://localhost:4200",
             "https://mkt-dashboard.github.io",
             "https://aulogin.github.io",
         };

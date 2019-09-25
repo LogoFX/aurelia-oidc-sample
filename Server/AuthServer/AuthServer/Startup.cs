@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using System.Net;
- 
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace AuthServer
@@ -28,6 +28,32 @@ namespace AuthServer
 
         public IConfiguration Configuration { get; }
 
+        private IIdentityServerBuilder UseCertificate(IServiceCollection services)
+        {
+            X509Certificate2 cert = null;
+            using (var certStore = new X509Store(StoreName.My, StoreLocation.CurrentUser))
+            {
+                certStore.Open(OpenFlags.ReadOnly);
+                var certCollection = certStore.Certificates.Find(
+                    X509FindType.FindByThumbprint,
+                    "95e323d42cbc7c788e45378234e4becf616e20b7",
+                    false);
+
+                if (certCollection.Count > 0)
+                {
+                    cert = certCollection[0];
+                }
+            }
+
+            if (cert == null)
+            {
+                // If the certificate is not installed, you might be in development and want to ise the developer credentials
+                return services.AddIdentityServer().AddDeveloperSigningCredential();
+            }
+
+            return services.AddIdentityServer().AddSigningCredential(cert);
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -37,8 +63,7 @@ namespace AuthServer
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddIdentityServer()
-                .AddDeveloperSigningCredential()
+            UseCertificate(services)
                 // this adds the operational data from DB (codes, tokens, consents)
                 .AddOperationalStore(options =>
                 {
