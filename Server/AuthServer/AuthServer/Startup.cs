@@ -1,4 +1,5 @@
-﻿using AuthServer.Extensions;
+﻿using System;
+using AuthServer.Extensions;
 using AuthServer.Infrastructure.Data.Identity;
 using AuthServer.Infrastructure.Services;
 using IdentityServer4.Services;
@@ -51,6 +52,7 @@ namespace AuthServer
                 return services.AddIdentityServer().AddDeveloperSigningCredential();
             }
 
+            Console.WriteLine($"USE Certificate {cert.IssuerName.Name}");
             return services.AddIdentityServer().AddSigningCredential(cert);
         }
 
